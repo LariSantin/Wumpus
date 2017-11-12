@@ -1,23 +1,44 @@
 package wumpus;
 
-import java.util.Arrays;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class Jogo {
+public class ChamaThreads {
+
     int totalLinhas;
     int totalColunas;
     int MaximoPocos;
     String[][] caverna;
 
-    public Jogo() {
-        this.totalLinhas = 10;
-        this.totalColunas = 10;
-        this.MaximoPocos = 10;
+    public ChamaThreads(int totalLinhas, int totalColunas, int MaximoPocos) {
+        this.totalLinhas = totalLinhas;
+        this.totalColunas = totalColunas;
+        this.MaximoPocos = MaximoPocos;
         this.caverna = new String[totalLinhas][totalColunas];
+        this.caverna = Inicia();
+    }
+    
+    
+    
+    public void ChamaT(){ 
+           
+       ThreadCacador Cacador = new ThreadCacador(totalLinhas,totalColunas, MaximoPocos, caverna, 300);
+       try { 
+           Thread.sleep(400);
+       } catch (InterruptedException ex) {
+           Logger.getLogger(ThreadCacador.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       ThreadWumpus Wumpus = new ThreadWumpus(totalLinhas,totalColunas,500,caverna);
+        try { 
+           Thread.sleep(500);
+       } catch (InterruptedException ex) {
+           Logger.getLogger(ThreadCacador.class.getName()).log(Level.SEVERE, null, ex);
+       }
+     
     }
 
-    public void Inicializa()
-    {
+   public String[][] Inicia(){
         Cacador cacador = new Cacador();
         int numeroPocos = 0;
         int linhaPocos = 0, colunaPocos = 0,linhaOuro = 0, colunaOuro = 0,linhaWumpus = 0, colunaWumpus = 0;
@@ -25,12 +46,15 @@ public class Jogo {
        
         Random gerador = new Random();
 	  
-        numeroPocos = 1 + gerador.nextInt(this.MaximoPocos);
+        numeroPocos = 1 + gerador.nextInt(MaximoPocos);
         System.out.println("numero: " + numeroPocos);
+        System.out.println("numeroLinhas " + totalLinhas);
+        System.out.println("numeroLinhas " + totalColunas);
         for(int i = 0; i < totalLinhas; i++) //inicializa matriz
         {
             for(int j = 0; j < totalColunas; j++)
             {
+                //System.out.println("[" + i + "] ["+ j +"]");
                 caverna[i][j] = "*";
             }
         }
@@ -556,124 +580,10 @@ public class Jogo {
               }
             }
          }
-        
-        impressao(caverna);
-        BuscaOuro(caverna);
-    }
-    public void impressao(String[][] caverna){
-        
-        System.out.println("Caverna:");
-        for(int i = 0; i < totalLinhas; i++)
-        {
-            System.out.print("|");
-            for(int j = 0; j < totalColunas; j++)
-            {
-                if("*".equals(caverna[i][j]))
-                {
-                     System.out.print(" " + " | ");
-                }
-                else{
-                     System.out.print(caverna[i][j] + " | ");
-                }
-            }
-            System.out.println("");            
-        }
+       System.out.println("─────────────────");
+       System.out.println("  BEM-VINDO A CAVERNA!");
+       System.out.println("─────────────────");
 
-    }
-    public void BuscaOuro(String[][] caverna){
-        
-       Cacador cacador = new Cacador(); 
-       boolean EncontrouOuro = false;
-       int i = 0,j = 0;
-//        System.out.println("historico");
-//        for(int f = 0; f < totalLinhas; f++){
-//            for(int o = 0; o < totalLinhas; o++){
-//                System.out.print( cacador.getHistorico()[i][j] +" ");
-//            }
-//            System.out.println("");
-//        }
-           
-            
-       while(cacador.getVida() > 0 && EncontrouOuro == false){
-           
-          // impressao(caverna);
-          
-            if(i != 0 && i != 9 && j != 0 && j != 9){
-                
-                if(caverna[i][j].equals(cacador.getId())){
-                    if("r".equals(caverna[i+1][j])){
-                        if("*".equals(cacador.ElementoPosicao(i+1, j)))
-                        {
-                          caverna[i+1][j] = cacador.getId();
-                          caverna[i][j]= "*";
-                          cacador.atualizahistorico(i+1, j, "r");
-                          cacador.atualizahistorico(i, j,"V");  
-                        }                       
-                    }
-                    if("r".equals(caverna[i-1][j])){
-                       if("*".equals(cacador.ElementoPosicao(i-1, j)))
-                        {
-                          caverna[i-1][j] = cacador.getId();
-                          caverna[i][j]= "*";
-                          cacador.atualizahistorico(i-1, j, "r");
-                          cacador.atualizahistorico(i, j,"V");
-                        }
-                    }
-                    if("r".equals(caverna[i][j+1])){
-                        if("*".equals(cacador.ElementoPosicao(i, j+1)))
-                        {
-                          caverna[i][j+1] = cacador.getId();
-                          caverna[i][j]= "*";
-                          cacador.atualizahistorico(i, j+1, "r");
-                          cacador.atualizahistorico(i, j,"V");
-                        }
-                    }
-                    if("r".equals(caverna[i][j-1])){
-                        if("*".equals(cacador.ElementoPosicao(i, j-1)))
-                        {
-                          caverna[i][j-1] = cacador.getId();
-                          caverna[i][j]= "*";
-                          cacador.atualizahistorico(i, j-1, "r");
-                          cacador.atualizahistorico(i, j,"V");
-                        }
-                    }
-                    if(caverna[i+1][j] == "*"){
-                   
-                    }
-                }
-            }
-        
-            if(i == 0){
-
-            }
-            if(i == 9){
-                
-            }
-            if(j == 0){
-                
-            }
-            if(j == 9){
-                
-            }
-       
-          //  System.out.println("[" + j + "] [ " + i +"]");
-            if(j >= totalColunas-1)
-            {
-              i++;  
-              j = 0;
-            }  
-
-           if(i >= totalLinhas)
-           {
-               i = 0;
-               EncontrouOuro = true;
-           }
-           j++;
-      }
-            
-        System.out.println("historico");
-        cacador.imprimeHist();
-        
-        
-    }
+      return caverna;
+  }     
 }
