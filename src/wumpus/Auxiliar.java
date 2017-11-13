@@ -1,6 +1,7 @@
 package wumpus;
 
 public class Auxiliar {
+    String aux;
     
  public void Ganhou(){
         System.out.println("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓");
@@ -42,4 +43,5 @@ public class Auxiliar {
             System.out.println("");            
         }
     }
+
 }

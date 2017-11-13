@@ -5,6 +5,7 @@ public class Cacador {
     String[][] historico = new String[10][10];
     int vida;
     boolean flecha;
+    boolean EncontrouOuro;
     
     /*SISTEMA DE PONTOS:::::::::::::
     +1000 se pegar o ouro
@@ -21,7 +22,8 @@ public class Cacador {
     public Cacador() {
         this.id = "C";
         this.vida = 1000;
-        this.flecha = true;
+        this.flecha = true; 
+        this.EncontrouOuro = false;
         iniciaHistorico();
     }
 
@@ -75,6 +77,15 @@ public class Cacador {
            }
             System.out.println("");
        }
-    }  
+    } 
+
+    public boolean isEncontrouOuro() {
+        return EncontrouOuro;
+    }
+
+    public void setEncontrouOuro(boolean EncontrouOuro) {
+        this.EncontrouOuro = EncontrouOuro;
+    }
+    
 }
 

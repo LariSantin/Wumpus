@@ -1,41 +1,58 @@
 package wumpus;
 
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.IOException;
 
-public class ChamaThreads {
-
+public class IniciaCaverna {
+    Cacador cacador = new Cacador();
     int totalLinhas;
     int totalColunas;
     int MaximoPocos;
     String[][] caverna;
+    String Ouro;
 
-    public ChamaThreads(int totalLinhas, int totalColunas, int MaximoPocos) {
+    public IniciaCaverna(int totalLinhas, int totalColunas, int MaximoPocos) {
         this.totalLinhas = totalLinhas;
         this.totalColunas = totalColunas;
         this.MaximoPocos = MaximoPocos;
         this.caverna = new String[totalLinhas][totalColunas];
         this.caverna = Inicia();
     }
+
+    public String getOuro() {
+        return Ouro;
+    }
+
+    public void setOuro(String Ouro) {
+        this.Ouro = Ouro;
+    }
     
     
-    
-    public void ChamaT(){ 
-           
-       ThreadCacador Cacador = new ThreadCacador(totalLinhas,totalColunas, MaximoPocos, caverna, 300);
-       try { 
-           Thread.sleep(400);
-       } catch (InterruptedException ex) {
-           Logger.getLogger(ThreadCacador.class.getName()).log(Level.SEVERE, null, ex);
+    public void ComecaJogo() throws IOException{ 
+       Auxiliar auxiliar = new Auxiliar();
+       Jogo jogo = new Jogo();
+       auxiliar.impressao(totalLinhas, totalColunas, caverna);
+       int  LinhaCac = 0, ColunaCac = 0;
+       boolean QuemAnda = true;
+       //true == cacador
+       //false == wumpus
+       
+       while(cacador.getVida() > 0 && cacador.isEncontrouOuro() == false){
+        for(int i = 0; i < totalLinhas; i++){
+               for(int j = 0; j < totalColunas; j++){
+                   if("C".equals(caverna[i][j])){
+                       LinhaCac = i;
+                       ColunaCac = j;
+                   }
+               }
+           } 
+       
+        jogo.Cacadorjoga(totalLinhas, totalColunas, MaximoPocos, caverna, LinhaCac,ColunaCac,cacador);
+        auxiliar.impressao(totalLinhas, totalColunas, caverna);
+        System.out.println("Pressione enter..");
+        System.in.read();
+
        }
-       ThreadWumpus Wumpus = new ThreadWumpus(totalLinhas,totalColunas,500,caverna);
-        try { 
-           Thread.sleep(500);
-       } catch (InterruptedException ex) {
-           Logger.getLogger(ThreadCacador.class.getName()).log(Level.SEVERE, null, ex);
-       }
-     
     }
 
    public String[][] Inicia(){

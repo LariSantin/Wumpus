@@ -1,57 +1,11 @@
 package wumpus;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-public class ThreadCacador implements Runnable{
-   int totalLinhas;
-    int totalColunas;
-    int MaximoPocos;
-    int tempo;
-    String[][] caverna;
-
-    public ThreadCacador(int totalLinhas, int totalColunas, int MaximoPocos, String[][] caverna,int tempo) {
-        this.totalLinhas = totalLinhas;
-        this.totalColunas = totalColunas;
-        this.MaximoPocos = MaximoPocos;
-        this.caverna = caverna;
-        this.tempo = tempo;
-        Thread t = new Thread(this);
-        t.start();
-    }
-
+public class Jogo{
+ // Cacador cacador = new Cacador();
     
-  @Override
-  public void run(){
-    Auxiliar auxiliar = new Auxiliar();
-    
-//              for(int i = 0; i < totalLinhas; i++){
-//                   for(int j = 0; j < totalColunas; j++){
-//                       System.out.print(caverna[i][j] + " | ");  
-//                   }
-//                   System.out.println("");
-//              } 
-              
-       Cacador cacador = new Cacador(); 
-       boolean EncontrouOuro = false;
-       int i = 0,j = 0;
-       auxiliar.impressao(totalLinhas,totalColunas,caverna);
-       while(cacador.getVida() > 0 && EncontrouOuro == false){
-           
-          //  auxiliar.impressao(totalLinhas,totalColunas,caverna);
-           if(j >= totalColunas)
-            {
-              i++;  
-              j = 0;
-            } 
-           if(i >= totalLinhas)
-           {
-               i = 0;
-              auxiliar.impressao(totalLinhas,totalColunas,caverna);
-               System.out.println("vida: " + cacador.getVida());
-             //  EncontrouOuro = true;
-             
-           }
+   public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,String[][] caverna, int i, int j, Cacador cacador){
+       Auxiliar auxiliar = new Auxiliar();
+
             if(i != 0 && i != 9 && j != 0 && j != 9){
                 /*A ordem de precedencia:::::::
                 se for um resplendor entra
@@ -71,9 +25,24 @@ public class ThreadCacador implements Runnable{
                         cacador.atualizahistorico(i-1, j, "r");
                         cacador.atualizahistorico(i, j,"V");
                         if("O".equals(caverna[i-2][j])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux+1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i-1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i-1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
@@ -85,7 +54,24 @@ public class ThreadCacador implements Runnable{
                         cacador.atualizahistorico(i, j-1, "r");
                         cacador.atualizahistorico(i, j,"V");
                         if("O".equals(caverna[i][j-2])){
-                            EncontrouOuro = true;
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i+1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i-1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
@@ -98,7 +84,24 @@ public class ThreadCacador implements Runnable{
                         cacador.atualizahistorico(i, j,"V");
                      
                         if("O".equals(caverna[i][j+2])){
-                            EncontrouOuro = true;
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i+1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i-1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
@@ -111,7 +114,24 @@ public class ThreadCacador implements Runnable{
                         cacador.atualizahistorico(i, j,"V");  
                        
                         if("O".equals(caverna[i+2][j])){
-                            EncontrouOuro = true;
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i+1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i+1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
@@ -119,40 +139,6 @@ public class ThreadCacador implements Runnable{
                     }
                    
                     //caso a posição esteja livre
-                    else if("b".equals(caverna[i-1][j]) && "*".equals(cacador.ElementoPosicao(i-1, j))){      
-                        caverna[i-1][j] = cacador.getId();
-                        caverna[i][j]= "*";
-                        cacador.atualizahistorico(i-1, j, "b");
-                        cacador.atualizahistorico(i, j,"V");
-                        
-                        int aux = cacador.getVida();
-                        cacador.setVida(aux-1);
-                    }
-                    else if("b".equals(caverna[i][j-1]) && "*".equals(cacador.ElementoPosicao(i, j-1))){
-                        caverna[i][j-1] = cacador.getId();
-                        caverna[i][j]= "*";
-                        cacador.atualizahistorico(i, j-1, "r");
-                        cacador.atualizahistorico(i, j,"V");
-                        int aux = cacador.getVida();
-                        cacador.setVida(aux-1);
-                    }
-                    else if("*".equals(caverna[i][j+1]) && "*".equals(cacador.ElementoPosicao(i, j+1))){
-                        caverna[i][j+1] = cacador.getId();
-                        caverna[i][j]= "*";
-                        cacador.atualizahistorico(i, j+1, "r");
-                        cacador.atualizahistorico(i, j,"V");
-                        int aux = cacador.getVida();
-                        cacador.setVida(aux-1);
-                    }
-                    else if("*".equals(caverna[i+1][j]) && "*".equals(cacador.ElementoPosicao(i+1, j))){
-                        caverna[i+1][j] = cacador.getId();
-                        caverna[i][j]= "*";
-                        cacador.atualizahistorico(i+1, j, "r");
-                        cacador.atualizahistorico(i, j,"V"); 
-                        int aux = cacador.getVida();
-                        cacador.setVida(aux-1);
-                    }
-                    //caso seja brisa
                      else if("*".equals(caverna[i-1][j]) && "*".equals(cacador.ElementoPosicao(i-1, j))){      
                         caverna[i-1][j] = cacador.getId();
                         caverna[i][j]= "*";
@@ -186,6 +172,40 @@ public class ThreadCacador implements Runnable{
                         int aux = cacador.getVida();
                         cacador.setVida(aux-1);
                     }
+                    //caso seja brisa
+                    else if("b".equals(caverna[i-1][j]) && "*".equals(cacador.ElementoPosicao(i-1, j))){      
+                        caverna[i-1][j] = cacador.getId();
+                        caverna[i][j]= "*";
+                        cacador.atualizahistorico(i-1, j, "b");
+                        cacador.atualizahistorico(i, j,"V");
+                        
+                        int aux = cacador.getVida();
+                        cacador.setVida(aux-1);
+                    }
+                    else if("b".equals(caverna[i][j-1]) && "*".equals(cacador.ElementoPosicao(i, j-1))){
+                        caverna[i][j-1] = cacador.getId();
+                        caverna[i][j]= "*";
+                        cacador.atualizahistorico(i, j-1, "r");
+                        cacador.atualizahistorico(i, j,"V");
+                        int aux = cacador.getVida();
+                        cacador.setVida(aux-1);
+                    }
+                    else if("b".equals(caverna[i][j+1]) && "*".equals(cacador.ElementoPosicao(i, j+1))){
+                        caverna[i][j+1] = cacador.getId();
+                        caverna[i][j]= "*";
+                        cacador.atualizahistorico(i, j+1, "r");
+                        cacador.atualizahistorico(i, j,"V");
+                        int aux = cacador.getVida();
+                        cacador.setVida(aux-1);
+                    }
+                    else if("b".equals(caverna[i+1][j]) && "*".equals(cacador.ElementoPosicao(i+1, j))){
+                        caverna[i+1][j] = cacador.getId();
+                        caverna[i][j]= "*";
+                        cacador.atualizahistorico(i+1, j, "r");
+                        cacador.atualizahistorico(i, j,"V"); 
+                        int aux = cacador.getVida();
+                        cacador.setVida(aux-1);
+                    }
                  //  auxiliar.impressao(totalLinhas,totalColunas,caverna);
                 }
             }
@@ -200,15 +220,24 @@ public class ThreadCacador implements Runnable{
                         cacador.atualizahistorico(i, j,"V");
                         
                         if("O".equals(caverna[i][j-2])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux+1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
-                        if("O".equals(caverna[i+1][j])){
+                        else if("O".equals(caverna[i+1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux+1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i-1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
@@ -222,15 +251,24 @@ public class ThreadCacador implements Runnable{
                         cacador.atualizahistorico(i, j,"V");
                         
                         if("O".equals(caverna[i][j+2])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux+1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
-                        if("O".equals(caverna[i+1][j])){
+                        else if("O".equals(caverna[i+1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux+1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i-1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
@@ -243,9 +281,24 @@ public class ThreadCacador implements Runnable{
                         cacador.atualizahistorico(i, j,"V");  
                         
                         if("O".equals(caverna[i+2][j])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux+1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i+1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i+1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
@@ -292,9 +345,24 @@ public class ThreadCacador implements Runnable{
                         cacador.atualizahistorico(i, j,"V");
                         
                         if("O".equals(caverna[i-2][j])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux + 1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if(j < (totalColunas-1) && "O".equals(caverna[i-1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux + 1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if(j > 0 && "O".equals(caverna[i-1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux + 1000);
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
@@ -306,10 +374,25 @@ public class ThreadCacador implements Runnable{
                         cacador.atualizahistorico(i, j-1, "r");
                         cacador.atualizahistorico(i, j,"V");
                         
-                        if("O".equals(caverna[i][j-2])){
+                        if(j > 0 && "O".equals(caverna[i][j-2])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux+1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i-1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i-1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
@@ -321,10 +404,25 @@ public class ThreadCacador implements Runnable{
                         cacador.atualizahistorico(i, j+1, "r");
                         cacador.atualizahistorico(i, j,"V");
                         
-                         if("O".equals(caverna[i][j+2])){
+                        if("O".equals(caverna[i][j+2])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux +1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i+1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux +1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i-1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux +1000);
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
@@ -370,10 +468,25 @@ public class ThreadCacador implements Runnable{
                        cacador.atualizahistorico(i-1, j, "r");
                        cacador.atualizahistorico(i, j,"V");
                        
-                       if("O".equals(caverna[i-2][j])){
+                       if(i > 0 && "O".equals(caverna[i-2][j])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux+1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                       }
+                       else if("O".equals(caverna[i-1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                       }
+                       else if("O".equals(caverna[i-1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                        }
                        int aux = cacador.getVida();
@@ -388,15 +501,24 @@ public class ThreadCacador implements Runnable{
                         
                         
                         if("O".equals(caverna[i][j+2])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux + 1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
-                        else if("O".equals(caverna[i+1][j])){
+                        else if("O".equals(caverna[i+1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux+ 1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i+1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+ 1000);
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
@@ -410,9 +532,24 @@ public class ThreadCacador implements Runnable{
                         cacador.atualizahistorico(i, j,"V");  
                         
                         if("O".equals(caverna[i+2][j])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux+1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i+1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i+1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
@@ -465,10 +602,25 @@ public class ThreadCacador implements Runnable{
                         cacador.atualizahistorico(i-1, j, "r");
                         cacador.atualizahistorico(i, j,"V");
                         
-                        if("O".equals(caverna[i-1][j])){
+                        if("O".equals(caverna[i-2][j])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux+1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i-1][j+1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i-1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
@@ -480,11 +632,26 @@ public class ThreadCacador implements Runnable{
                         cacador.atualizahistorico(i, j-1, "r");
                         cacador.atualizahistorico(i, j,"V");
                         
-                        if("O".equals(caverna[i][j-1])){
+                        if("O".equals(caverna[i][j-2])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux+1000);
-                            EncontrouOuro = true;
-                           auxiliar.Ganhou();
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i+1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
+                        }
+                        else if("O".equals(caverna[i-1][j-1])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
+                            int aux = cacador.getVida();
+                            cacador.setVida(aux+1000);
+                            cacador.setEncontrouOuro(true);
+                            auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
                         cacador.setVida(aux-1);
@@ -496,9 +663,10 @@ public class ThreadCacador implements Runnable{
                         cacador.atualizahistorico(i, j,"V"); 
                         
                         if("O".equals(caverna[i+1][j])){
+                            auxiliar.impressao(totalLinhas, totalColunas, caverna);
                             int aux = cacador.getVida();
                             cacador.setVida(aux+1000);
-                            EncontrouOuro = true;
+                            cacador.setEncontrouOuro(true);
                             auxiliar.Ganhou();
                         }
                         int aux = cacador.getVida();
@@ -534,15 +702,9 @@ public class ThreadCacador implements Runnable{
                    
                     //  auxiliar.impressao(totalLinhas,totalColunas,caverna);
                 }
-            }
-           j++;
-           
-      }
-   
+            }        
+      //  System.out.println("historico");
+       // cacador.imprimeHist();
         
-        System.out.println("historico");
-        cacador.imprimeHist();
-        
-    }
-       
+  }
 }
