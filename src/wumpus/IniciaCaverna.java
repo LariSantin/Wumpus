@@ -9,7 +9,6 @@ public class IniciaCaverna {
     int totalColunas;
     int MaximoPocos;
     String[][] caverna;
-    String Ouro;
 
     public IniciaCaverna(int totalLinhas, int totalColunas, int MaximoPocos) {
         this.totalLinhas = totalLinhas;
@@ -19,39 +18,49 @@ public class IniciaCaverna {
         this.caverna = Inicia();
     }
 
-    public String getOuro() {
-        return Ouro;
-    }
-
-    public void setOuro(String Ouro) {
-        this.Ouro = Ouro;
-    }
-    
-    
+       
     public void ComecaJogo() throws IOException{ 
        Auxiliar auxiliar = new Auxiliar();
        Jogo jogo = new Jogo();
        auxiliar.impressao(totalLinhas, totalColunas, caverna);
-       int  LinhaCac = 0, ColunaCac = 0;
+       int  LinhaCac = 0, ColunaCac = 0, LinhaW = 0, ColunaW = 0;
        boolean QuemAnda = true;
        //true == cacador
        //false == wumpus
        
        while(cacador.getVida() > 0 && cacador.isEncontrouOuro() == false){
         for(int i = 0; i < totalLinhas; i++){
-               for(int j = 0; j < totalColunas; j++){
-                   if("C".equals(caverna[i][j])){
-                       LinhaCac = i;
-                       ColunaCac = j;
-                   }
-               }
+            for(int j = 0; j < totalColunas; j++){
+                if("C".equals(caverna[i][j])){
+                    LinhaCac = i;
+                    ColunaCac = j;
+                }
+                else if("W".equals(caverna[i][j])){
+                    LinhaW = i;
+                    ColunaW = j;
+                }
+            }
            } 
-       
-        jogo.Cacadorjoga(totalLinhas, totalColunas, MaximoPocos, caverna, LinhaCac,ColunaCac,cacador);
-        auxiliar.impressao(totalLinhas, totalColunas, caverna);
-        System.out.println("Pressione enter..");
-        System.in.read();
-
+        if(QuemAnda ==  true){
+          System.out.println("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+          System.out.println("Caçador");
+          jogo.Cacadorjoga(totalLinhas, totalColunas, MaximoPocos, caverna, LinhaCac,ColunaCac,cacador);
+          auxiliar.impressao(totalLinhas, totalColunas, caverna);
+        //  System.out.println("Historico");
+       //   cacador.imprimeHist();
+          QuemAnda = false;
+          System.out.println("Pressione enter..");
+          System.in.read();
+        }   
+        else if(QuemAnda == false){
+          System.out.println("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+          System.out.println("Wumpus");
+          jogo.Wumpusjoga(totalLinhas, totalColunas, caverna, LinhaW, ColunaW, cacador);
+          auxiliar.impressao(totalLinhas, totalColunas, caverna);
+          QuemAnda = true;
+          System.out.println("Pressione enter..");
+          System.in.read();
+        }
        }
     }
 
