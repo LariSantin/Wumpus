@@ -1,5 +1,6 @@
 package wumpus;
 
+import static javafx.scene.control.Alert.AlertType.INFORMATION;
 import javax.swing.JOptionPane;
 
 /**
@@ -1193,7 +1194,7 @@ public void jButton225Elemento(String elemento){
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         Autores = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        Historia = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mundo Do Wumpus");
@@ -2945,6 +2946,11 @@ public void jButton225Elemento(String elemento){
         );
 
         jMenu1.setText("Sobre");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         Autores.setText("Autores");
         Autores.addActionListener(new java.awt.event.ActionListener() {
@@ -2954,13 +2960,13 @@ public void jButton225Elemento(String elemento){
         });
         jMenu1.add(Autores);
 
-        jMenuItem2.setText("História");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        Historia.setText("História");
+        Historia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                HistoriaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(Historia);
 
         jMenuBar1.add(jMenu1);
 
@@ -2986,20 +2992,30 @@ public void jButton225Elemento(String elemento){
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void AutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AutoresActionPerformed
         JOptionPane.showMessageDialog(null,"Autores:\n"
                 + "Brendo Peres Bizetto\n"
                 + "Larissa Santin\n");
     }//GEN-LAST:event_AutoresActionPerformed
 
-  
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void HistoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistoriaActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(rootPane, "Bem-Vindo!\n\n O mundo do wumpus é uma caverna, e nela habita um monstro chamado Wumpus\n"
+                + " que fica andando aleatoriamente pela caverna e carrega consigo um fedor, há também poços nos quais é possível\n"
+                + " sentir uma brisa, há também um pote de ouro. Esse pote leva o caçador a entrar na caverna para busca-lo.\n"
+                + " Mas a caverna é escura e cheia de terrores,\n"
+                + " o caçador possui uma única flecha que pode matar o Wumpus e também pode perceber o fedor deste\n"
+                + " e a brisa dos poços e o resplendor do ouro!", "Mundo do Wumpus", WIDTH);
+     
+    }//GEN-LAST:event_HistoriaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Autores;
+    private javax.swing.JMenuItem Historia;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton100;
@@ -3227,7 +3243,6 @@ public void jButton225Elemento(String elemento){
     private javax.swing.JButton jButton99;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
