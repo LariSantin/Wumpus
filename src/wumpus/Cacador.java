@@ -2,7 +2,7 @@ package wumpus;
 
 public class Cacador {
     String id;
-    String[][] historico = new String[10][10];
+    String[][] historico = new String[15][15];
     int vida;
     boolean flecha;
     boolean EncontrouOuro;
@@ -44,8 +44,8 @@ public class Cacador {
     }
 
     public void iniciaHistorico(){
-       for(int i = 0; i < 10; i++){
-           for(int j = 0; j < 10; j++){
+       for(int i = 0; i < 15; i++){
+           for(int j = 0; j < 15; j++){
                this.historico[i][j] = "*";
            }
        }
@@ -71,8 +71,8 @@ public class Cacador {
     
     
     public void imprimeHist(){
-        for(int i = 0; i < 10; i++){
-           for(int j = 0; j < 10; j++){
+        for(int i = 0; i < 15; i++){
+           for(int j = 0; j < 15; j++){
                System.out.print(this.historico[i][j] +" | ");
            }
             System.out.println("");

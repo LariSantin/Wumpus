@@ -1,71 +1,105 @@
 package wumpus;
 
-import java.util.Random;
 import java.io.IOException;
+import java.util.Random;
 
 public class IniciaCaverna {
-    Cacador cacador = new Cacador();
-    int totalLinhas;
-    int totalColunas;
-    int MaximoPocos;
-    String[][] caverna;
+     int totalLinhas;
+     int totalColunas;
+     int MaximoPocos;
+     String[][] caverna;
+     String[][] CopiaCaverna;
+     Cacador cacador = new Cacador();
 
+     public void novoJogo() throws IOException{
+        Caverna cavernaTela = new Caverna();
+        cavernaTela.setVisible(false);
+        comeca();
+     }
     public IniciaCaverna(int totalLinhas, int totalColunas, int MaximoPocos) {
         this.totalLinhas = totalLinhas;
         this.totalColunas = totalColunas;
         this.MaximoPocos = MaximoPocos;
         this.caverna = new String[totalLinhas][totalColunas];
+        this.CopiaCaverna = new String[totalLinhas][totalColunas];
         this.caverna = Inicia();
     }
+     public void comeca() throws IOException{
+        Caverna cavernaTela = new Caverna();
+        cavernaTela.Distribui(caverna);
+        cavernaTela.setVisible(true);
+        
+        boolean QuemAnda = true, WumpusVive = true;
+        int  LinhaCac = 0, ColunaCac = 0, LinhaW = 0, ColunaW = 0;
+        Jogo jogo = new Jogo();
+        Auxiliar aux = new Auxiliar();
 
-       
-    public void ComecaJogo() throws IOException{ 
-       Auxiliar auxiliar = new Auxiliar();
-       Jogo jogo = new Jogo();
-       auxiliar.impressao(totalLinhas, totalColunas, caverna);
-       int  LinhaCac = 0, ColunaCac = 0, LinhaW = 0, ColunaW = 0;
-       boolean QuemAnda = true;
-       //true == cacador
-       //false == wumpus
-       
-       while(cacador.getVida() > 0 && cacador.isEncontrouOuro() == false){
-        for(int i = 0; i < totalLinhas; i++){
-            for(int j = 0; j < totalColunas; j++){
-                if("C".equals(caverna[i][j])){
-                    LinhaCac = i;
-                    ColunaCac = j;
-                }
-                else if("W".equals(caverna[i][j])){
-                    LinhaW = i;
-                    ColunaW = j;
-                }
-            }
-           } 
-        if(QuemAnda ==  true){
-          System.out.println("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-          System.out.println("Caçador");
-          jogo.Cacadorjoga(totalLinhas, totalColunas, MaximoPocos, caverna, LinhaCac,ColunaCac,cacador);
-          auxiliar.impressao(totalLinhas, totalColunas, caverna);
-        //  System.out.println("Historico");
-       //   cacador.imprimeHist();
-          QuemAnda = false;
-          System.out.println("Pressione enter..");
-          System.in.read();
-        }   
-        else if(QuemAnda == false){
-          System.out.println("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-          System.out.println("Wumpus");
-          jogo.Wumpusjoga(totalLinhas, totalColunas, caverna, LinhaW, ColunaW, cacador);
-          auxiliar.impressao(totalLinhas, totalColunas, caverna);
-          QuemAnda = true;
-          System.out.println("Pressione enter..");
-          System.in.read();
+       for(int s = 0; s < totalLinhas; s++){
+        for(int e = 0; e < totalColunas; e++){
+            CopiaCaverna[s][e] = caverna[s][e];
         }
        }
-    }
+        //true == cacador
+        //false == wumpus  
+       while(cacador.getVida() > 0 && cacador.isEncontrouOuro() == false){
+            for(int i = 0; i < totalLinhas; i++){
+                for(int j = 0; j < totalColunas; j++){
+                    if("C".equals(caverna[i][j])){
+                        LinhaCac = i;
+                        ColunaCac = j;
+                    }
+                    else if("W".equals(caverna[i][j])){
+                        LinhaW = i;
+                        ColunaW = j;
+                    }
+                    }
+           }
+            if(QuemAnda ==  true){
 
-   public String[][] Inicia(){
-        Cacador cacador = new Cacador();
+            System.out.println("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+            System.out.println("Caçador");
+            jogo.Cacadorjoga(totalLinhas, totalColunas, MaximoPocos, caverna, LinhaCac, ColunaCac, cacador, WumpusVive);
+            aux.impressao(totalLinhas, totalColunas, caverna);
+            QuemAnda = false;
+            System.out.println("Vida do Caçador:");
+            System.out.println(cacador.getVida());
+            System.out.println("");
+//            System.out.println("Pressione enter..");
+//            System.in.read();
+            cavernaTela.Distribui(caverna);
+            cavernaTela.setVisible(true);
+            try {
+                Thread.sleep(900);// pausa de 2000 milisegundos
+              }catch (InterruptedException e) {
+                e.printStackTrace(); 
+}
+          }   
+          else if(QuemAnda == false && WumpusVive == true){
+            System.out.println("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+            System.out.println("Wumpus");
+            //se wumpus ta vivo=--------------------------
+            jogo.Wumpusjoga(totalLinhas, totalColunas, caverna, LinhaW, ColunaW, cacador, CopiaCaverna);
+            aux.impressao(totalLinhas, totalColunas, caverna);
+            QuemAnda = true;
+//            System.out.println("Pressione enter..");
+//           System.in.read();
+            cavernaTela.Distribui(caverna);
+            cavernaTela.setVisible(true);
+            try {
+                Thread.sleep(900);// pausa de 2000 milisegundos
+            }catch (InterruptedException e) {
+                e.printStackTrace(); 
+              }
+              }
+            if(cacador.isEncontrouOuro() == true){
+             cavernaTela.setVisible(false);
+             TelaCacadorGanhou ganhou = new TelaCacadorGanhou();
+             ganhou.setVisible(true);
+             aux.Ganhou();
+          }
+         }
+     }
+       public String[][] Inicia(){
         int numeroPocos = 0;
         int linhaPocos = 0, colunaPocos = 0,linhaOuro = 0, colunaOuro = 0,linhaWumpus = 0, colunaWumpus = 0;
         boolean ouro = true, wumpus = true;
@@ -132,161 +166,80 @@ public class IniciaCaverna {
                 }
             }
         }
-        caverna[9][0] = cacador.id;
+        caverna[14][0] = cacador.getId();
         
         
        for(int i = 0; i < totalLinhas; i++)
         {
             for(int j = 0; j < totalColunas; j++)
             {
-                if(i != 0 && j != 9 && i != 9 && j != 0)
+                if(i != 0 && j != totalColunas-1 && i != totalColunas-1 && j != 0)
                 {
-
+                    //se for ouro
+                    if("O".equals(caverna[i][j]))
+                    {
+                        if("*".equals(caverna[i+1][j]))
+                        {
+                          caverna[i+1][j]= "r";
+                        }
+                        if("*".equals(caverna[i-1][j]))
+                        {
+                          caverna[i-1][j]= "r";
+                        }
+                        if("*".equals(caverna[i][j+1]))
+                        {
+                          caverna[i][j+1]= "r";
+                        }
+                        if("*".equals(caverna[i][j-1]))
+                        {
+                          caverna[i][j-1]= "r";
+                        }
+                    }
+                    //caso seja o wumpus
+                    if("W".equals(caverna[i][j]))
+                    {
+                        if("*".equals(caverna[i+1][j]))
+                        {
+                          caverna[i+1][j]= "f";
+                        }
+                        if("*".equals(caverna[i-1][j]))
+                        {
+                          caverna[i-1][j]= "f";
+                        }
+                        if("*".equals(caverna[i][j+1]))
+                        {
+                          caverna[i][j+1]= "f";
+                        }
+                       if("*".equals(caverna[i][j-1]))
+                        {
+                          caverna[i][j-1]= "f";
+                        }
+                   }
                    if("P".equals(caverna[i][j]))
                    {
                         if("*".equals(caverna[i+1][j]))
                         {
                           caverna[i+1][j]= "b";
                         }
-                       //;;;;;;;;;;;;;;;;;;;;;;;;;;;
                         if("*".equals(caverna[i-1][j]))
                         {
                           caverna[i-1][j]= "b";
                         }
-                       //´´´´´´´´´´´´´´´´´´
                         if("*".equals(caverna[i][j+1]))
                         {
                           caverna[i][j+1]= "b";
                         }
-                        //==============================
                         if("*".equals(caverna[i][j-1]))
                         {
                           caverna[i][j-1]= "b";
                         }
-                   }
-                   //caso seja o wumpus
-                   if("W".equals(caverna[i][j]))
-                   {
-                       if("*".equals(caverna[i+1][j]))
-                        {
-                          caverna[i+1][j]= "f";
-                        }
-                        
-                       //;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                        if("*".equals(caverna[i-1][j]))
-                        {
-                          caverna[i-1][j]= "f";
-                        }
-                        
-                       //´´´´´´´´´´´´´´´´´´
-                       if("*".equals(caverna[i][j+1]))
-                        {
-                          caverna[i][j+1]= "f";
-                        }
-                        
-                        //==============================
-                       if("*".equals(caverna[i][j-1]))
-                        {
-                          caverna[i][j-1]= "f";
-                        }
-                   }
-                   //se for ouro
-                   if("O".equals(caverna[i][j]))
-                   {
-                        if("*".equals(caverna[i+1][j]))
-                        {
-                          caverna[i+1][j]= "r";
-                        }
-                        
-                       //;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                       if("*".equals(caverna[i-1][j]))
-                        {
-                          caverna[i-1][j]= "r";
-                        }
-                        
-                       //´´´´´´´´´´´´´´´´´´
-                       if("*".equals(caverna[i][j+1]))
-                        {
-                          caverna[i][j+1]= "r";
-                        }
-                        
-                        //==============================
-                       if("*".equals(caverna[i][j-1]))
-                        {
-                          caverna[i][j-1]= "r";
-                        }
-                        
                    }
                 }
                 //------------------------------------------------------------------------------------------
                 else if(i == 0){
-                    
-                    if("P".equals(caverna[i][j]))
+                    //se for ouro
+                    if("O".equals(caverna[i][j]))
                     {
-                        if("*".equals(caverna[i+1][j]))
-                        {
-                          caverna[i+1][j]= "b";
-                        }
-                      if(j == 0)
-                      {
-                        if("*".equals(caverna[i][j+1]))
-                        {
-                          caverna[i][j+1]= "b";
-                        }
-                      }
-                      if(j == 9)
-                      {
-                        if("*".equals(caverna[i][j-1]))
-                        {
-                          caverna[i][j-1]= "b";
-                        }
-                      }else{
-                         if("*".equals(caverna[i][j+1]))
-                        {
-                          caverna[i][j+1]= "b";
-                        }
-                        if("*".equals(caverna[i][j-1]))
-                        {
-                          caverna[i][j-1]= "b";
-                        } 
-                      }
-                        //==============================
-                        
-                   }
-                   //caso seja o wumpus
-                   if("W".equals(caverna[i][j]))
-                   {
-                       if("*".equals(caverna[i+1][j]))
-                        {
-                          caverna[i+1][j]= "f";
-                        }
-                      if(j == 0)
-                      {
-                        if("*".equals(caverna[i][j+1]))
-                        {
-                          caverna[i][j+1]= "f";
-                        }
-                      }
-                      if(j == 9)
-                      {
-                        if("*".equals(caverna[i][j-1]))
-                        {
-                          caverna[i][j-1]= "f";
-                        }
-                      }else{
-                         if("*".equals(caverna[i][j+1]))
-                        {
-                          caverna[i][j+1]= "f";
-                        }
-                        if("*".equals(caverna[i][j-1]))
-                        {
-                          caverna[i][j-1]= "f";
-                        } 
-                      }                       
-                   }
-                   //se for ouro
-                   if("O".equals(caverna[i][j]))
-                   {
                         if("*".equals(caverna[i+1][j]))
                         {
                           caverna[i+1][j]= "r";
@@ -298,7 +251,7 @@ public class IniciaCaverna {
                           caverna[i][j+1]= "r";
                         }
                       }
-                      if(j == 9)
+                      if(j == totalColunas-1)
                       {
                         if("*".equals(caverna[i][j-1]))
                         {
@@ -314,10 +267,133 @@ public class IniciaCaverna {
                           caverna[i][j-1]= "r";
                         } 
                       }       
-                  }
+                    }
+                    //caso seja o wumpus
+                    if("W".equals(caverna[i][j]))
+                    {
+                       if("*".equals(caverna[i+1][j]))
+                        {
+                          caverna[i+1][j]= "f";
+                        }
+                      if(j == 0)
+                      {
+                        if("*".equals(caverna[i][j+1]))
+                        {
+                          caverna[i][j+1]= "f";
+                        }
+                      }
+                      if(j == totalColunas-1)
+                      {
+                        if("*".equals(caverna[i][j-1]))
+                        {
+                          caverna[i][j-1]= "f";
+                        }
+                      }else{
+                         if("*".equals(caverna[i][j+1]))
+                        {
+                          caverna[i][j+1]= "f";
+                        }
+                        if("*".equals(caverna[i][j-1]))
+                        {
+                          caverna[i][j-1]= "f";
+                        } 
+                      }                       
+                    }
+                    if("P".equals(caverna[i][j]))
+                    {
+                        if("*".equals(caverna[i+1][j]))
+                        {
+                          caverna[i+1][j]= "b";
+                        }
+                      if(j == 0)
+                      {
+                        if("*".equals(caverna[i][j+1]))
+                        {
+                          caverna[i][j+1]= "b";
+                        }
+                      }
+                      if(j == totalColunas-1)
+                      {
+                        if("*".equals(caverna[i][j-1]))
+                        {
+                          caverna[i][j-1]= "b";
+                        }
+                      }else{
+                         if("*".equals(caverna[i][j+1]))
+                        {
+                          caverna[i][j+1]= "b";
+                        }
+                        if("*".equals(caverna[i][j-1]))
+                        {
+                          caverna[i][j-1]= "b";
+                        } 
+                      }                        
+                   }
                 }
                    //---------------------------------------------------------------------------------------
-                else if(i == 9){
+                else if(i == totalLinhas-1){
+                    //se for ouro
+                    if("O".equals(caverna[i][j]))
+                    {
+                        if("*".equals(caverna[i-1][j]))
+                        {
+                          caverna[i-1][j]= "r";
+                        }
+                      if(j == 0)
+                      {
+                        if("*".equals(caverna[i][j+1]))
+                        {
+                          caverna[i][j+1]= "r";
+                        }
+                      }
+                      if(j == totalColunas-1)
+                      {
+                        if("*".equals(caverna[i][j-1]))
+                        {
+                          caverna[i][j-1]= "r";
+                        }
+                      }else{
+                         if("*".equals(caverna[i][j+1]))
+                        {
+                          caverna[i][j+1]= "r";
+                        }
+                        if("*".equals(caverna[i][j-1]))
+                        {
+                          caverna[i][j-1]= "r";
+                        } 
+                      }
+                    }
+                    //caso seja o wumpus
+                    if("W".equals(caverna[i][j]))
+                    {
+                       if("*".equals(caverna[i-1][j]))
+                        {
+                          caverna[i-1][j]= "f";
+                        }
+                      if(j == 0)
+                      {
+                        if("*".equals(caverna[i][j+1]))
+                        {
+                          caverna[i][j+1]= "b";
+                        }
+                      }
+                      if(j == totalColunas-1)
+                      {
+                        if("*".equals(caverna[i][j-1]))
+                        {
+                          caverna[i][j-1]= "f";
+                        }
+                      }else{
+                         if("*".equals(caverna[i][j+1]))
+                        {
+                          caverna[i][j+1]= "f";
+                        }
+                        if("*".equals(caverna[i][j-1]))
+                        {
+                          caverna[i][j-1]= "f";
+                        } 
+                      }
+                    }
                     if("P".equals(caverna[i][j]))
                     {
                         if("*".equals(caverna[i-1][j]))
@@ -331,7 +407,7 @@ public class IniciaCaverna {
                           caverna[i][j+1]= "b";
                         }
                       }
-                      if(j == 9)
+                      if(j == totalColunas-1)
                       {
                         if("*".equals(caverna[i][j-1]))
                         {
@@ -348,72 +424,71 @@ public class IniciaCaverna {
                         }
                       }
                     }
-                   //caso seja o wumpus
-                   if("W".equals(caverna[i][j]))
-                   {
-                       if("*".equals(caverna[i-1][j]))
-                        {
-                          caverna[i-1][j]= "f";
-                        }
-                      if(j == 0)
-                      {
+                }
+                else if(j == 0)
+                {
+                    //se for ouro
+                    if("O".equals(caverna[i][j]))
+                    {
                         if("*".equals(caverna[i][j+1]))
                         {
-                          caverna[i][j+1]= "b";
+                          caverna[i][j+1]= "r";
                         }
-                      }
-                      if(j == 9)
+                      if(i == 0)
                       {
-                        if("*".equals(caverna[i][j-1]))
+                        if("*".equals(caverna[i+1][j]))
                         {
-                          caverna[i][j-1]= "f";
+                          caverna[i+1][j]= "r";
                         }
-                      }else{
-                         if("*".equals(caverna[i][j+1]))
-                        {
-                          caverna[i][j+1]= "f";
-                        }
-                        if("*".equals(caverna[i][j-1]))
-                        {
-                          caverna[i][j-1]= "f";
-                        } 
                       }
-                   }
-                   //se for ouro
-                   if("O".equals(caverna[i][j]))
-                   {
+                      if(i == totalLinhas-1)
+                      {
                         if("*".equals(caverna[i-1][j]))
                         {
                           caverna[i-1][j]= "r";
                         }
-                      if(j == 0)
-                      {
-                        if("*".equals(caverna[i][j+1]))
-                        {
-                          caverna[i][j+1]= "r";
-                        }
-                      }
-                      if(j == 9)
-                      {
-                        if("*".equals(caverna[i][j-1]))
-                        {
-                          caverna[i][j-1]= "r";
-                        }
                       }else{
-                         if("*".equals(caverna[i][j+1]))
+                         if("*".equals(caverna[i-1][j]))
                         {
-                          caverna[i][j+1]= "r";
+                          caverna[i-1][j]= "r";
                         }
-                        if("*".equals(caverna[i][j-1]))
+                        if("*".equals(caverna[i+1][j]))
                         {
-                          caverna[i][j-1]= "r";
+                          caverna[i+1][j]= "r";
                         } 
                       }
-                        //==============================
-                   }
-                }
-                else if(j == 0)
-                {
+                    }
+                    //caso seja o wumpus
+                    if("W".equals(caverna[i][j]))
+                    {
+                       if("*".equals(caverna[i][j+1]))
+                        {
+                          caverna[i][j+1]= "f";
+                        }
+                      if(i == 0)
+                      {
+                        if("*".equals(caverna[i+1][j]))
+                        {
+                          caverna[i+1][j]= "b";
+                        }
+                      }
+                      if(i == totalLinhas-1)
+                      {
+                        if("*".equals(caverna[i-1][j]))
+                        {
+                          caverna[i-1][j]= "f";
+                        }
+                      }else{
+                         if("*".equals(caverna[i-1][j]))
+                        {
+                          caverna[i-1][j]= "f";
+                        }
+                        if("*".equals(caverna[i+1][j]))
+                        {
+                          caverna[i+1][j]= "f";
+                        } 
+                      }
+                    }
                     if("P".equals(caverna[i][j]))
                     {
                         if("*".equals(caverna[i][j+1]))
@@ -427,7 +502,7 @@ public class IniciaCaverna {
                           caverna[i+1][j]= "b";
                         }
                       }
-                      if(i == 9)
+                      if(i == totalLinhas-1)
                       {
                         if("*".equals(caverna[i-1][j]))
                         {
@@ -444,104 +519,43 @@ public class IniciaCaverna {
                         } 
                       }   
                    }
-                   //caso seja o wumpus
-                   if("W".equals(caverna[i][j]))
-                   {
-                       if("*".equals(caverna[i][j+1]))
-                        {
-                          caverna[i][j+1]= "f";
-                        }
-                      if(i == 0)
-                      {
-                        if("*".equals(caverna[i+1][j]))
-                        {
-                          caverna[i+1][j]= "b";
-                        }
-                      }
-                      if(i == 9)
-                      {
-                        if("*".equals(caverna[i-1][j]))
-                        {
-                          caverna[i-1][j]= "f";
-                        }
-                      }else{
-                         if("*".equals(caverna[i-1][j]))
-                        {
-                          caverna[i-1][j]= "f";
-                        }
-                        if("*".equals(caverna[i+1][j]))
-                        {
-                          caverna[i+1][j]= "f";
-                        } 
-                      }
-                   }
-                   //se for ouro
-                   if("O".equals(caverna[i][j]))
-                   {
-                        if("*".equals(caverna[i][j+1]))
-                        {
-                          caverna[i][j+1]= "r";
-                        }
-                      if(i == 0)
-                      {
-                        if("*".equals(caverna[i+1][j]))
-                        {
-                          caverna[i+1][j]= "r";
-                        }
-                      }
-                      if(i == 9)
-                      {
-                        if("*".equals(caverna[i-1][j]))
-                        {
-                          caverna[i-1][j]= "r";
-                        }
-                      }else{
-                         if("*".equals(caverna[i-1][j]))
-                        {
-                          caverna[i-1][j]= "r";
-                        }
-                        if("*".equals(caverna[i+1][j]))
-                        {
-                          caverna[i+1][j]= "r";
-                        } 
-                      }
-                   }
                 }
-                else if( j == 9)
+                else if( j == totalColunas-1)
                 {
-                   if("P".equals(caverna[i][j]))
+                    //se for ouro
+                    if("O".equals(caverna[i][j]))
                     {
                         if("*".equals(caverna[i][j-1]))
                         {
-                          caverna[i][j-1]= "b";
+                          caverna[i][j-1]= "r";
                         }
                       if(i == 0)
                       {
                         if("*".equals(caverna[i+1][j]))
                         {
-                          caverna[i+1][j]= "b";
+                          caverna[i+1][j]= "r";
                         }
                       }
-                      if(i == 9)
+                      if(i == totalLinhas-1)
                       {
                         if("*".equals(caverna[i-1][j]))
                         {
-                          caverna[i-1][j]= "b";
+                          caverna[i-1][j]= "r";
                         }
                       }else{
                          if("*".equals(caverna[i-1][j]))
                         {
-                          caverna[i-1][j]= "b";
+                          caverna[i-1][j]= "r";
                         }
                         if("*".equals(caverna[i+1][j]))
                         {
-                          caverna[i+1][j]= "b";
+                          caverna[i+1][j]= "r";
                         } 
-                      }    
-                   }
-                   //caso seja o wumpus
-                   if("W".equals(caverna[i][j]))
-                   {
+                       }  
+                    }
+                    //caso seja o wumpus
+                    if("W".equals(caverna[i][j]))
+                    {
                        if("*".equals(caverna[i][j-1]))
                         {
                           caverna[i][j-1]= "f";
@@ -553,7 +567,7 @@ public class IniciaCaverna {
                           caverna[i+1][j]= "b";
                         }
                       }
-                      if(i == 9)
+                      if(i == totalLinhas-1)
                       {
                         if("*".equals(caverna[i-1][j]))
                         {
@@ -571,37 +585,36 @@ public class IniciaCaverna {
                       }
                         //==============================
                         
-                   }
-                   //se for ouro
-                   if("O".equals(caverna[i][j]))
-                   {
+                    }
+                   if("P".equals(caverna[i][j]))
+                    {
                         if("*".equals(caverna[i][j-1]))
                         {
-                          caverna[i][j-1]= "r";
+                          caverna[i][j-1]= "b";
                         }
                       if(i == 0)
                       {
                         if("*".equals(caverna[i+1][j]))
                         {
-                          caverna[i+1][j]= "r";
+                          caverna[i+1][j]= "b";
                         }
                       }
-                      if(i == 9)
+                      if(i == totalLinhas-1)
                       {
                         if("*".equals(caverna[i-1][j]))
                         {
-                          caverna[i-1][j]= "r";
+                          caverna[i-1][j]= "b";
                         }
                       }else{
                          if("*".equals(caverna[i-1][j]))
                         {
-                          caverna[i-1][j]= "r";
+                          caverna[i-1][j]= "b";
                         }
                         if("*".equals(caverna[i+1][j]))
                         {
-                          caverna[i+1][j]= "r";
+                          caverna[i+1][j]= "b";
                         } 
-                       }  
+                      }    
                    }
               }
             }
@@ -611,5 +624,5 @@ public class IniciaCaverna {
        System.out.println("─────────────────");
 
       return caverna;
-  }     
+  }  
 }
