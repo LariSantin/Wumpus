@@ -19,7 +19,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
         ::::::::::::::::
        */
         if(caverna[i][j].equals("C")){
-            System.out.println("caverna tudo");
+            //System.out.println("caverna tudo");
             //se for o resplendor
             if("r".equals(caverna[i-1][j]) && "*".equals(cacador.ElementoPosicao(i-1, j))){      
                 caverna[i-1][j] = cacador.getId();
@@ -230,7 +230,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 cacador.setVida(aux-1);
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                   // System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -268,7 +268,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                   // System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -305,7 +305,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 cacador.setVida(aux-1);
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                    //System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -342,7 +342,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 cacador.setVida(aux-1);
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                    //System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -371,23 +371,23 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 }
             }
             else{
-                System.out.println("nenhuma possivel");
+                //System.out.println("nenhuma possivel");
                 int aux = cacador.getVida();
                 cacador.setVida(aux-1);
                 cacador.atualizahistorico(i, j, "I");
-                if("V".equals(cacador.ElementoPosicao(i, j+1))){
+                if(!"W".equals(caverna[i][j+1]) && "V".equals(cacador.ElementoPosicao(i, j+1))){
                      caverna[i][j+1] = "C";
                      caverna[i][j] = "*";
                 }
-                else if("V".equals(cacador.ElementoPosicao(i-1, j))){
+                else if(!"W".equals(caverna[i-1][j]) && "V".equals(cacador.ElementoPosicao(i-1, j))){
                      caverna[i-1][j] = "C";
                      caverna[i][j] = "*";
                 }
-                else if("V".equals(cacador.ElementoPosicao(i, j-1))){
+                else if(!"W".equals(caverna[i][j-1]) && "V".equals(cacador.ElementoPosicao(i, j-1))){
                      caverna[i][j-1] = "C";
                      caverna[i][j] = "*";
                 }                
-                else if("V".equals(cacador.ElementoPosicao(i+1, j))){
+                else if(!"W".equals(caverna[i+1][j]) && "V".equals(cacador.ElementoPosicao(i+1, j))){
                      caverna[i+1][j] = "C";
                      caverna[i][j] = "*";
                 }
@@ -397,7 +397,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
     }
     else if(i == 0){
            if(caverna[i][j].equals("C")){
-            System.out.println("caverna i = 0: " + caverna[i][j]);
+            //System.out.println("caverna i = 0: " + caverna[i][j]);
             //se for o resplendor
             if(j > 0 && "r".equals(caverna[i][j-1]) && "*".equals(cacador.ElementoPosicao(i, j-1))){
                 caverna[i][j-1] = cacador.getId();
@@ -543,7 +543,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 cacador.setVida(aux-1);
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                   // System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -580,7 +580,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 cacador.setVida(aux-1);
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                   // System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -617,7 +617,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 cacador.setVida(aux-1);
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                   // System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -646,20 +646,20 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 }
             }
             else{
-                System.out.println("nenhuma possivel");
+               // System.out.println("nenhuma possivel");
                  int aux = cacador.getVida();
                 cacador.setVida(aux-1);
                 cacador.atualizahistorico(i, j, "I");
                 
-                if(j < totalColunas-1 && "V".equals(cacador.ElementoPosicao(i, j+1))){
+                if(j < totalColunas-1 && !"W".equals(caverna[i][j+1]) && "V".equals(cacador.ElementoPosicao(i, j+1))){
                      caverna[i][j+1] = "C";
                      caverna[i][j] = "*";
                 }
-                else if(j > 0 && "V".equals(cacador.ElementoPosicao(i, j-1))){
+                else if(j > 0 && !"W".equals(caverna[i][j-1]) && "V".equals(cacador.ElementoPosicao(i, j-1))){
                      caverna[i][j-1] = "C";
                      caverna[i][j] = "*";
                 }
-                else if("V".equals(cacador.ElementoPosicao(i+1, j))){
+                else if(!"W".equals(caverna[i+1][j]) && "V".equals(cacador.ElementoPosicao(i+1, j))){
                      caverna[i+1][j] = "C";
                      caverna[i][j] = "*";
                 }
@@ -670,7 +670,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
     else if(i == totalLinhas-1){
 
         if(caverna[i][j].equals("C")){
-            System.out.println("caverna i = 9: " + caverna[i][j]);
+           // System.out.println("caverna i = 9: " + caverna[i][j]);
             //se for o resplendor
             if("r".equals(caverna[i-1][j]) && "*".equals(cacador.ElementoPosicao(i-1, j))){      
                 caverna[i-1][j] = cacador.getId();
@@ -819,7 +819,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
 
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                   // System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -857,7 +857,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                    //System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -894,7 +894,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 cacador.setVida(aux-1);
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                    ///System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -923,19 +923,19 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 }
             }
             else{
-                System.out.println("nenhuma possivel");
+                //System.out.println("nenhuma possivel");
                 int aux = cacador.getVida();
                 cacador.setVida(aux-1);
                 cacador.atualizahistorico(i, j, "I");
-                if("V".equals(cacador.ElementoPosicao(i-1, j))){
+                if(!"W".equals(caverna[i-1][j]) && "V".equals(cacador.ElementoPosicao(i-1, j))){
                      caverna[i-1][j] = "C";
                      caverna[i][j] = "*";
                 }
-                else if(j > 0 && "V".equals(cacador.ElementoPosicao(i, j-1))){
+                else if(j > 0 && !"W".equals(caverna[i][j-1]) && "V".equals(cacador.ElementoPosicao(i, j-1))){
                      caverna[i][j-1] = "C";
                      caverna[i][j] = "*";
                 }
-                else if(j < totalColunas-1 && "V".equals(cacador.ElementoPosicao(i, j+1))){
+                else if(j < totalColunas-1 && !"W".equals(caverna[i][j+1]) && "V".equals(cacador.ElementoPosicao(i, j+1))){
                      caverna[i][j+1] = "C";
                      caverna[i][j] = "*";
                 }
@@ -945,7 +945,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
     else if(j == 0){
         if(caverna[i][j].equals("C")){
             //se for o resplendor
-            System.out.println("caverna j =0 : " + caverna[i][j]);
+           // System.out.println("caverna j =0 : " + caverna[i][j]);
             if(i > 0 && "r".equals(caverna[i-1][j]) && "*".equals(cacador.ElementoPosicao(i-1, j))){ 
                caverna[i-1][j] = cacador.getId();
                caverna[i][j]= "*";
@@ -1088,7 +1088,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
 
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                    //System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -1125,7 +1125,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 cacador.setVida(aux-1);
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                    //System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -1162,7 +1162,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 cacador.setVida(aux-1);
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                    //System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -1191,19 +1191,19 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 }
             }
             else{
-                System.out.println("nenhuma possivel");
+                //System.out.println("nenhuma possivel");
                 int aux = cacador.getVida();
                 cacador.setVida(aux-1);
                 cacador.atualizahistorico(i, j, "I");
-                if("V".equals(cacador.ElementoPosicao(i, j+1))){
+                if(!"W".equals(caverna[i][j+1]) && "V".equals(cacador.ElementoPosicao(i, j+1))){
                      caverna[i][j+1] = "C";
                      caverna[i][j] = "*";
                 }
-                else if(i > 0 && "V".equals(cacador.ElementoPosicao(i-1, j))){
+                else if(i > 0 && !"W".equals(caverna[i-1][j]) && "V".equals(cacador.ElementoPosicao(i-1, j))){
                      caverna[i-1][j] = "C";
                      caverna[i][j] = "*";
                 }
-                else if(i < totalLinhas-1 && "V".equals(cacador.ElementoPosicao(i+1,j))){
+                else if(i < totalLinhas-1 && !"W".equals(caverna[i+1][j]) && "V".equals(cacador.ElementoPosicao(i+1,j))){
                      caverna[i+1][j] = "C";
                      caverna[i][j] = "*";
                 }
@@ -1213,7 +1213,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
     else if(j == totalColunas-1){
         //System.out.println("caverna " + caverna[i][j]);
         if(caverna[i][j].equals("C")){
-            System.out.println("caverna j =9 : " + caverna[i][j]);
+            //System.out.println("caverna j =9 : " + caverna[i][j]);
             //se for o resplendor
             if(i > 0 && "r".equals(caverna[i-1][j]) && "*".equals(cacador.ElementoPosicao(i-1, j))){      
                 caverna[i-1][j] = cacador.getId();
@@ -1364,7 +1364,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
 
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                    //System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -1402,7 +1402,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                    //System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("GgGgGgGgGgGgGgGgGgGgGgGgGg");
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
@@ -1439,7 +1439,7 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 cacador.setVida(aux-1);
                 if(cacador.isFlecha() == true){
                     GritoWumpus = atiraflecha(caverna);
-                    System.out.println("Grito " + GritoWumpus);
+                    //System.out.println("Grito " + GritoWumpus);
                     if(GritoWumpus.equals("GgGgG")){
                         System.out.println("Cacador acertou a flecha e matou o wumpus!");
                         for(int k = 0; k < totalLinhas; k++){
@@ -1467,19 +1467,19 @@ public void Cacadorjoga(int totalLinhas, int totalColunas, int MaximoPocos,Strin
                 }
             }
             else{
-                System.out.println("Nenhuma posicao foi po");
+                //System.out.println("Nenhuma posicao foi po");
                 int aux = cacador.getVida();
                 cacador.setVida(aux-1);
                 cacador.atualizahistorico(i, j, "I");
-                if(i > 0 && "V".equals(cacador.ElementoPosicao(i-1, j))){
+                if(i > 0 && !"W".equals(caverna[i-1][j]) && "V".equals(cacador.ElementoPosicao(i-1, j))){
                      caverna[i-1][j] = "C";
                      caverna[i][j] = "*";
                 }
-                if("V".equals(cacador.ElementoPosicao(i, j-1))){
+                else if(!"W".equals(caverna[i][j-1]) && "V".equals(cacador.ElementoPosicao(i, j-1))){
                      caverna[i][j-1] = "C";
                      caverna[i][j] = "*";
                 }
-                else if(i < totalLinhas-1 && "V".equals(cacador.ElementoPosicao(i+1,j))){
+                else if(i < totalLinhas-1 && !"W".equals(caverna[i+1][j]) && "V".equals(cacador.ElementoPosicao(i+1,j))){
                      caverna[i+1][j] = "C";
                      caverna[i][j] = "*";
                 }                
@@ -1940,7 +1940,7 @@ public String[][] ColocaAvisos(String[][] caverna){
     return caverna;
 }
 public String atiraflecha(String[][] caverna){
-    System.out.println("direcao");
+    //System.out.println("direcao");
     int direcao;
     String Grito = null;
     int LinhaC = 0, ColunaC = 0, LinhaW = 0, ColunaW = 0;
@@ -1962,7 +1962,6 @@ public String atiraflecha(String[][] caverna){
             }
         }
     }
-    System.out.println("dir: " + direcao);
     /*
      1 = (i-1)
      2 = (j-1)
@@ -2010,7 +2009,6 @@ public void Wumpusjoga(int totalLinhas, int totalColunas,String[][] caverna, int
     Random gerador = new Random();
 	  
     direcao = 1 + gerador.nextInt(3);
-    System.out.println("direcao: " + direcao);
     /*
      1 = (i-1)
      2 = (j-1)
@@ -2027,21 +2025,21 @@ public void Wumpusjoga(int totalLinhas, int totalColunas,String[][] caverna, int
     if(i > 0 && i < totalLinhas-1 && j > 0 && j < totalColunas-1){
         switch (direcao) {
         case 1:
-            System.out.println("if 1, case 1");
+            //System.out.println("if 1, case 1");
             if("C".equals(caverna[i-1][j])){
                 int aux;
                 aux= cacador.getVida();
                 cacador.setVida(aux-1000);
+                auxiliar.Perdeu("devorado");
                 TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
                 perdeu.setVisible(true);
-                auxiliar.Perdeu("devorado");
             }else{
                 caverna[i][j]= "*";
                 caverna[i-1][j] = "W";
             }
             break;
         case 2:
-            System.out.println("if 1, case 2");
+           // System.out.println("if 1, case 2");
             if("C".equals(caverna[i][j-1])){
                 int aux;
                 aux= cacador.getVida();
@@ -2055,7 +2053,7 @@ public void Wumpusjoga(int totalLinhas, int totalColunas,String[][] caverna, int
             }
             break;
         case 3:
-            System.out.println("if 1, case 3");
+            //System.out.println("if 1, case 3");
             if("C".equals(caverna[i][j+1])){
                 int aux;
                 aux= cacador.getVida();
@@ -2083,7 +2081,7 @@ public void Wumpusjoga(int totalLinhas, int totalColunas,String[][] caverna, int
             }
             break;
         default:
-            System.out.println("if 1, default");
+           // System.out.println("if 1, default");
             NenhumaDirecao(i,j,caverna,cacador);
             break;
      }
@@ -2091,39 +2089,39 @@ public void Wumpusjoga(int totalLinhas, int totalColunas,String[][] caverna, int
     else if(i == 0){
         switch (direcao) {
        case 2:
-           System.out.println("if 2, case 2");
+           //System.out.println("if 2, case 2");
            if(j > 0 ){
             if("C".equals(caverna[i][j-1])){
-                 int aux;
-                 aux= cacador.getVida();
-                 cacador.setVida(aux-1000);
-                 TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
-                 perdeu.setVisible(true);
-                 auxiliar.Perdeu("devorado");
+                int aux;
+                aux= cacador.getVida();
+                cacador.setVida(aux-1000);
+                TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
+                perdeu.setVisible(true);
+                auxiliar.Perdeu("devorado");
              }else{
-                 caverna[i][j]= "*";
-                 caverna[i][j-1] = "W";
+                caverna[i][j]= "*";
+                caverna[i][j-1] = "W";
              }
            }
            break;
        case 3:
-           System.out.println("if 2, case 3");
+          // System.out.println("if 2, case 3");
            if(j < totalColunas-1){
             if("C".equals(caverna[i][j+1])){
-                 int aux;
-                 aux= cacador.getVida();
-                 cacador.setVida(aux-1000);
-                 TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
-                 perdeu.setVisible(true);
-                 auxiliar.Perdeu("devorado");
+                int aux;
+                aux= cacador.getVida();
+                cacador.setVida(aux-1000);
+                TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
+                perdeu.setVisible(true);
+                auxiliar.Perdeu("devorado");
              }else{
-                 caverna[i][j]= "*";
-                 caverna[i][j+1] = "W";
+                caverna[i][j]= "*";
+                caverna[i][j+1] = "W";
              }
            }
            break;
        case 4:
-           System.out.println("if 2, case 4");
+           //System.out.println("if 2, case 4");
             if("C".equals(caverna[i+1][j])){
                 int aux;
                 aux= cacador.getVida();
@@ -2137,7 +2135,7 @@ public void Wumpusjoga(int totalLinhas, int totalColunas,String[][] caverna, int
             }   
            break;
        default:
-           System.out.println("if 2, def");
+           //System.out.println("if 2, def");
            NenhumaDirecao(i,j,caverna, cacador);
            break;
      }
@@ -2145,7 +2143,7 @@ public void Wumpusjoga(int totalLinhas, int totalColunas,String[][] caverna, int
     else if(i == 14){
         switch (direcao) {
        case 1:
-           System.out.println("if 3, case 1");
+          // System.out.println("if 3, case 1");
            if("C".equals(caverna[i-1][j])){
                 int aux;
                 aux= cacador.getVida();
@@ -2159,21 +2157,23 @@ public void Wumpusjoga(int totalLinhas, int totalColunas,String[][] caverna, int
             }
            break;
        case 2:
-           System.out.println("if 3, case 2");
+           //System.out.println("if 3, case 2");
            if(j > 0){
             if("C".equals(caverna[i][j-1])){
-                 int aux;
-                 aux= cacador.getVida();
-                 cacador.setVida(aux-1000);
-                 auxiliar.Perdeu("devorado");
+                int aux;
+                aux= cacador.getVida();
+                cacador.setVida(aux-1000);
+                TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
+                perdeu.setVisible(true);
+                auxiliar.Perdeu("devorado");
              }else{
-                 caverna[i][j]= "*";
-                 caverna[i][j-1] = "W";
+                caverna[i][j]= "*";
+                caverna[i][j-1] = "W";
              }
            }
            break;
        case 3:
-           System.out.println("if 3, case 3");
+         //  System.out.println("if 3, case 3");
            if(j < totalColunas-1){
             if("C".equals(caverna[i][j+1])){
                 int aux;
@@ -2189,7 +2189,7 @@ public void Wumpusjoga(int totalLinhas, int totalColunas,String[][] caverna, int
            }
            break;
        default:
-           System.out.println("if 3,def");
+           //System.out.println("if 3,def");
            NenhumaDirecao(i,j,caverna, cacador);
            break;
      }
@@ -2197,15 +2197,15 @@ public void Wumpusjoga(int totalLinhas, int totalColunas,String[][] caverna, int
     else if(j == 0){
         switch (direcao) {
        case 1:
-           System.out.println("if 4, case 1");
+           //System.out.println("if 4, case 1");
            if(i > 0){
             if("C".equals(caverna[i-1][j])){
-                 int aux;
-                 aux= cacador.getVida();
-                 cacador.setVida(aux-1000);
-                 TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
-                 perdeu.setVisible(true);
-                 auxiliar.Perdeu("devorado");
+                int aux;
+                aux= cacador.getVida();
+                cacador.setVida(aux-1000);
+                TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
+                perdeu.setVisible(true);
+                auxiliar.Perdeu("devorado");
              }else{
                  caverna[i][j]= "*";
                  caverna[i-1][j] = "W";
@@ -2213,37 +2213,37 @@ public void Wumpusjoga(int totalLinhas, int totalColunas,String[][] caverna, int
            }
            break;
        case 3:
-           System.out.println("if 4, case 3");
+         //  System.out.println("if 4, case 3");
             if("C".equals(caverna[i][j+1])){
-                 int aux;
-                 aux= cacador.getVida();
-                 cacador.setVida(aux-1000);
-                 TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
-                 perdeu.setVisible(true);
-                 auxiliar.Perdeu("devorado");
+                int aux;
+                aux= cacador.getVida();
+                cacador.setVida(aux-1000);
+                TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
+                perdeu.setVisible(true);
+                auxiliar.Perdeu("devorado");
              }else{
                  caverna[i][j]= "*";
                  caverna[i][j+1] = "W";
              }
            break;
        case 4:
-           System.out.println("if 4, case 4");
+          // System.out.println("if 4, case 4");
            if(i < totalLinhas-1){
             if("C".equals(caverna[i+1][j])){
-                 int aux;
-                 aux= cacador.getVida();
-                 cacador.setVida(aux-1000);
-                 TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
-                 perdeu.setVisible(true);
-                 auxiliar.Perdeu("devorado");
+                int aux;
+                aux= cacador.getVida();
+                cacador.setVida(aux-1000);
+                TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
+                perdeu.setVisible(true);
+                auxiliar.Perdeu("devorado");
              }else{
-                 caverna[i][j]= "*";
-                 caverna[i+1][j] = "W";
+                caverna[i][j]= "*";
+                caverna[i+1][j] = "W";
              }
            }
            break;
        default:
-           System.out.println("if 4, def");
+          // System.out.println("if 4, def");
            NenhumaDirecao(i,j,caverna, cacador);
            break;
      }
@@ -2251,23 +2251,23 @@ public void Wumpusjoga(int totalLinhas, int totalColunas,String[][] caverna, int
     else if(j == 14){
         switch (direcao) {
        case 1:
-           System.out.println("if 5, case 1");
+        //   System.out.println("if 5, case 1");
            if(i > 0){
             if("C".equals(caverna[i-1][j])){
-                 int aux;
-                 aux= cacador.getVida();
-                 cacador.setVida(aux-1000);
-                 TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
-                 perdeu.setVisible(true);
-                 auxiliar.Perdeu("devorado");
+                int aux;
+                aux= cacador.getVida();
+                cacador.setVida(aux-1000);
+                TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
+                perdeu.setVisible(true);
+                auxiliar.Perdeu("devorado");
              }else{
-                 caverna[i][j]= "*";
-                 caverna[i-1][j] = "W";
+                caverna[i][j]= "*";
+                caverna[i-1][j] = "W";
              }
            }
            break;
        case 2:
-           System.out.println("if 5, case 2");
+           //System.out.println("if 5, case 2");
            if("C".equals(caverna[i][j-1])){
                 int aux;
                 aux= cacador.getVida();
@@ -2281,24 +2281,24 @@ public void Wumpusjoga(int totalLinhas, int totalColunas,String[][] caverna, int
             }
            break;
        case 4:
-           System.out.println("if 5, case 4");
+           //System.out.println("if 5, case 4");
            
            if(i < totalLinhas-1){
             if("C".equals(caverna[i+1][j])){
-                 int aux;
-                 aux= cacador.getVida();
-                 cacador.setVida(aux-1000);
-                 TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
-                 perdeu.setVisible(true);
-                 auxiliar.Perdeu("devorado");
+                int aux;
+                aux= cacador.getVida();
+                cacador.setVida(aux-1000);
+                TelaCacadorDevorado perdeu = new TelaCacadorDevorado();
+                perdeu.setVisible(true);
+                auxiliar.Perdeu("devorado");
              }else{
-                 caverna[i][j]= "*";
-                 caverna[i+1][j] = "W";
+                caverna[i][j]= "*";
+                caverna[i+1][j] = "W";
              }
            }
            break;
        default:
-           System.out.println("if 5,def");
+          // System.out.println("if 5,def");
            NenhumaDirecao(i,j,caverna,cacador);
            break;
      }

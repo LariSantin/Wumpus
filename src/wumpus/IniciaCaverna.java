@@ -28,7 +28,12 @@ public class IniciaCaverna {
         Caverna cavernaTela = new Caverna();
         cavernaTela.Distribui(caverna);
         cavernaTela.setVisible(true);
-        
+        try {
+                Thread.sleep(900);// pausa de 2000 milisegundos
+              }catch (InterruptedException e) {
+                e.printStackTrace(); 
+           }
+          
         boolean QuemAnda = true, WumpusVive = true;
         int  LinhaCac = 0, ColunaCac = 0, LinhaW = 0, ColunaW = 0;
         Jogo jogo = new Jogo();
@@ -63,16 +68,18 @@ public class IniciaCaverna {
             QuemAnda = false;
             System.out.println("Vida do Caçador:");
             System.out.println(cacador.getVida());
+            System.out.println("Historico");
+            cacador.imprimeHist();
             System.out.println("");
 //            System.out.println("Pressione enter..");
 //            System.in.read();
             cavernaTela.Distribui(caverna);
             cavernaTela.setVisible(true);
             try {
-                Thread.sleep(900);// pausa de 2000 milisegundos
+                Thread.sleep(800);// pausa de 2000 milisegundos
               }catch (InterruptedException e) {
                 e.printStackTrace(); 
-}
+            }
           }   
           else if(QuemAnda == false && WumpusVive == true){
             System.out.println("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
@@ -86,13 +93,13 @@ public class IniciaCaverna {
             cavernaTela.Distribui(caverna);
             cavernaTela.setVisible(true);
             try {
-                Thread.sleep(900);// pausa de 2000 milisegundos
+                Thread.sleep(800);// pausa de 2000 milisegundos
             }catch (InterruptedException e) {
                 e.printStackTrace(); 
               }
               }
             if(cacador.isEncontrouOuro() == true){
-             cavernaTela.setVisible(false);
+            //cavernaTela.setVisible(false);
              TelaCacadorGanhou ganhou = new TelaCacadorGanhou();
              ganhou.setVisible(true);
              aux.Ganhou();
